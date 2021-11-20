@@ -15,26 +15,26 @@ import java.net.UnknownHostException;
  *
  * @author Alber
  */
-public class GestioneServer {
+public class GestionePeer {
 
-    DatagramSocket server;
+    DatagramSocket peer;
     InetAddress IPAddress;
     String nome;
 
-    public GestioneServer() throws SocketException, UnknownHostException {
+    public GestionePeer() throws SocketException, UnknownHostException {
         this.nome="";
-        this.server = new DatagramSocket(666);
+        this.peer = new DatagramSocket(666);
         this.IPAddress = InetAddress.getLocalHost();;
     }
 
-    public GestioneServer(String nome,DatagramSocket server, InetAddress IPAddress) {
+    public GestionePeer(String nome,DatagramSocket server, InetAddress IPAddress) {
         this.nome=nome;
-        this.server = server;
+        this.peer = server;
         this.IPAddress = IPAddress;
     }
     
     public void connessione(){
-            server.connect(addr);
+            
     }
     
 
