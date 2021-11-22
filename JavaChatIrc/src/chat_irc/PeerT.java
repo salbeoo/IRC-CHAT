@@ -39,8 +39,6 @@ public class PeerT extends Thread {
             if (scelta.equalsIgnoreCase("C")) {
                 peer.client.connetti();
             } else{
-//                RiceviT riceviServer=new RiceviT(peer.server);
-//                riceviServer.start();
                 peer.client.messaggia();
             }
         }

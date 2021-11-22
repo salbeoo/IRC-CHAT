@@ -56,17 +56,17 @@ public class ServerPeer {
             String msgToSend = "";
             while (!msgToSend.equalsIgnoreCase("Bye")) {
                 msgToSend = bufferedReader.readLine();
+
+                System.out.print(msgToSend);
                 
-                System.out.print(msgToSend );
-//                "[" + peer.nome + "] "+
-                
+
                 bufferedWriter.write(msgToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(RiceviT.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ServerPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }

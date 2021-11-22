@@ -25,24 +25,32 @@ public class ClientPeer {
 
     Socket peer = null;
     int portConnessione;
-    
+
     String nome;
     InputStreamReader inputStreamReader = null;
     OutputStreamWriter outputStreamWriter = null;
     BufferedReader bufferedReader = null;
     BufferedWriter bufferedWriter = null;
 
-    public ClientPeer(String nome,int port) {
-        this.nome=nome;
+    public ClientPeer(String nome, int port) {
+        this.nome = nome;
         portConnessione = port;
     }
 
     public void connetti() {
 
         try {
+
             System.out.println("Provo a connettermi al server del peer2");
             peer = new Socket(InetAddress.getLocalHost(), portConnessione);
-            System.out.println("Client Connesso");
+            
+            outputStreamWriter = new OutputStreamWriter(peer.getOutputStream());
+            bufferedWriter = new BufferedWriter(outputStreamWriter);
+            
+            bufferedWriter.write(nome);
+            bufferedWriter.newLine();
+            bufferedWriter.flush();
+//            System.out.println("Client: "+ "[" + nome + "]"+ "Connesso");
         } catch (UnknownHostException ex) {
             Logger.getLogger(ClientPeer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
