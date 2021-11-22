@@ -42,7 +42,7 @@ public class ClientPeer {
         try {
             System.out.println("Provo a connettermi al server del peer2");
             peer = new Socket(InetAddress.getLocalHost(), portConnessione);
-            System.out.println("Connesso");
+            System.out.println("Client Connesso");
         } catch (UnknownHostException ex) {
             Logger.getLogger(ClientPeer.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {

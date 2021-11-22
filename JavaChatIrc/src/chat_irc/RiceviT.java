@@ -20,40 +20,15 @@ import java.util.logging.Logger;
  */
 public class RiceviT extends Thread {
 
-    PeerInfo peer;
+    ServerPeer serverPeer;
 
-    InputStreamReader inputStreamReader = null;
-    OutputStreamWriter outputStreamWriter = null;
-    BufferedReader bufferedReader = null;
-    BufferedWriter bufferedWriter = null;
 
-    public RiceviT(PeerInfo peer) {
-        this.peer = peer;
+    public RiceviT(ServerPeer peer) {
+        this.serverPeer = serverPeer;
     }
 
     public void run() {
-        try {
-            inputStreamReader = new InputStreamReader(peer.peer.getInputStream());
-            outputStreamWriter = new OutputStreamWriter(peer.peer.getOutputStream());
-
-            bufferedReader = new BufferedReader(inputStreamReader);
-            bufferedWriter = new BufferedWriter(outputStreamWriter);
-
-            String msgToSend = "";
-            while (!msgToSend.equalsIgnoreCase("Bye")) {
-                msgToSend = bufferedReader.readLine();
-                
-                System.out.print("[" + peer.nome + "] "+msgToSend );
-                
-                bufferedWriter.write(msgToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-
-        } catch (IOException ex) {
-            Logger.getLogger(RiceviT.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        serverPeer.ricevi();
     }
 
 }

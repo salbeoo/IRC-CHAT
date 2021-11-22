@@ -24,7 +24,7 @@ public class PeerT extends Thread {
 
     public void run() {
 //        MyBoard boar=new MyBoard(peer.nome);
-        ComunicaT comunica = new ComunicaT(peer.client);
+        
         
         ServerT serverT=new ServerT(peer.server);
         serverT.start();
@@ -38,8 +38,10 @@ public class PeerT extends Thread {
             
             if (scelta.equalsIgnoreCase("C")) {
                 peer.client.connetti();
-            } else {
-                comunica.start();
+            } else{
+//                RiceviT riceviServer=new RiceviT(peer.server);
+//                riceviServer.start();
+                peer.client.messaggia();
             }
         }
     }

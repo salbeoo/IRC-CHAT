@@ -18,5 +18,6 @@ public class ServerT extends Thread {
     
     public void run(){
         serverPeer.attenti();
+        serverPeer.ricevi();
     }
 }
