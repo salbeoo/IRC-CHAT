@@ -58,16 +58,12 @@ public class PeerInfo {
         }
     }
 
-    public void waitConnessione() throws IOException {
-        peer = server.accept();
-
-    }
-
-    public void connessione(PeerInfo peer2) throws IOException {
-        SocketAddress add2 = new InetSocketAddress(InetAddress.getLocalHost(), peer2.port);
+    public void connessione() throws IOException {
 //            System.out.println("Ip: "+peer.getInetAddress()+ " Port: "+peer.getPort());
 //            System.out.println("Ip: "+peer2.peer.getInetAddress()+ " Port: "+peer2.peer.getPort());
-        waitConnessione();
+        System.out.println(nome + ": in attesa di connessione");
+        peer = server.accept();
+        System.out.println(nome + ": connesso");
     }
 
     public void comunicazione() {
@@ -79,9 +75,10 @@ public class PeerInfo {
             bufferedWriter = new BufferedWriter(outputStreamWriter);
 
             Scanner tastiera = new Scanner(System.in);
-
-            while (true) {
-                String msgToSend = tastiera.nextLine();
+            String msgToSend = "";
+            while (!msgToSend.equalsIgnoreCase("Bye")) {
+                System.out.print("["+nome+"]");
+                msgToSend = tastiera.nextLine();
                 bufferedWriter.write(msgToSend);
                 bufferedWriter.newLine();
                 bufferedWriter.flush();

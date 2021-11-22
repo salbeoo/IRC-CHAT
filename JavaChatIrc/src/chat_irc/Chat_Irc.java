@@ -5,7 +5,10 @@
  */
 package chat_irc;
 
+import java.awt.EventQueue;
+import java.awt.HeadlessException;
 import java.io.IOException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -16,18 +19,21 @@ public class Chat_Irc {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
+        PeerInfo peer1 = new PeerInfo("Peer1", 666);
+        PeerInfo peer2 = new PeerInfo("Peer2", 777);
         
-        PeerInfo peer1=new PeerInfo("Peer1",666);
-        PeerInfo peer2=new PeerInfo("Peer1",777);
-        
-        PeerT pt1=new PeerT(peer1, 'c');
-        
-        System.out.println("C : Connessione \nM : Comunica \nD : Chiusura");
-        peer1.connessione(peer2);
-        peer1.comunicazione();
-        
+
+        PeerT pt1 = new PeerT(peer1);
+        PeerT pt2 = new PeerT(peer2);
+
+        pt1.start();
+        pt2.start();
+
+        pt1.join();
+        pt2.join();
+
     }
-    
+
 }
