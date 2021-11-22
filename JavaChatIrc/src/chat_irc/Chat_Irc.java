@@ -8,6 +8,7 @@ package chat_irc;
 import java.awt.EventQueue;
 import java.awt.HeadlessException;
 import java.io.IOException;
+import java.util.Scanner;
 import javax.swing.JFrame;
 
 /**
@@ -21,19 +22,22 @@ public class Chat_Irc {
      */
     public static void main(String[] args) throws IOException, InterruptedException {
         // TODO code application logic here
-        PeerInfo peer1 = new PeerInfo("Peer1", 666);
-        PeerInfo peer2 = new PeerInfo("Peer2", 777);
+        Scanner tastiera = new Scanner(System.in);
         
-
+        System.out.println("Inserire nome");
+        String nome=tastiera.nextLine();
+        
+        System.out.println("Inserire porta");
+        int port=tastiera.nextInt();
+        
+        System.out.println("Inserire porta destinartio");
+        int portD=tastiera.nextInt();
+        
+        PeerInfo peer1 = new PeerInfo(nome, port,portD);
+        
         PeerT pt1 = new PeerT(peer1);
-        PeerT pt2 = new PeerT(peer2);
-
         pt1.start();
-        pt2.start();
-
         pt1.join();
-        pt2.join();
-
     }
 
 }

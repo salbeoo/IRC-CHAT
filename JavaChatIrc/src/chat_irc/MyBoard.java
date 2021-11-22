@@ -5,6 +5,7 @@
  */
 package chat_irc;
 
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
@@ -19,7 +20,9 @@ import javax.swing.JPanel;
  */
 public class MyBoard extends JFrame {
 
-    public MyBoard() throws HeadlessException {
+    String titolo;
+    public MyBoard(String titolo) throws HeadlessException {
+        this.titolo=titolo;
         init();
     }
 
@@ -30,15 +33,19 @@ public class MyBoard extends JFrame {
         TextArea textOutput = new TextArea(13, 38);
         p.add(textOutput);
         
-        TextArea textInput=new TextArea(1, 38);
+        TextField textInput=new TextField(30);
+        
         p.add(textInput);
-        p.setBackground(Color.black);
+        
+        Button invia=new Button("invia");
+        p.add(invia);
+//        p.setBackground(Color.black);
         
         f.add(p);
         f.setSize(new Dimension(300, 300));
         f.setVisible(true);
         f.setResizable(false);
-        f.setTitle(" ");
+        f.setTitle(titolo);
         f.setLocationRelativeTo(null);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

@@ -23,18 +23,23 @@ public class PeerT extends Thread {
     }
 
     public void run() {
-        MyBoard boar=new MyBoard();
+//        MyBoard boar=new MyBoard(peer.nome);
+        ComunicaT comunica = new ComunicaT(peer.client);
+        
+        ServerT serverT=new ServerT(peer.server);
+        serverT.start();
+        
         Scanner tastiera = new Scanner(System.in);
         while (true) {
-            System.out.println(peer.nome + "\n" + "C : Connessione \nM : Comunica \nD : Chiusura");
+            System.out.println("\n" + "C : Connessione \nM : Comunica \nD : Chiusura");
+            System.out.print("[" + peer.nome + "] ");
+
             String scelta = tastiera.nextLine();
-            if (scelta.equalsIgnoreCase("C"))
-                try {
-                peer.connessione();
-            } catch (IOException ex) {
-                Logger.getLogger(PeerT.class.getName()).log(Level.SEVERE, null, ex);
+            
+            if (scelta.equalsIgnoreCase("C")) {
+                peer.client.connetti();
             } else {
-                peer.comunicazione();
+                comunica.start();
             }
         }
     }

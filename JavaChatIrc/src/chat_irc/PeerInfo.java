@@ -26,9 +26,9 @@ import java.util.logging.Logger;
  */
 public class PeerInfo {
 
-    Socket peer;
-    ServerSocket server;
-    int port;
+    ServerPeer server;
+    ClientPeer client;
+    int port, portDestinatario;
     String nome;
 
     InputStreamReader inputStreamReader = null;
@@ -36,57 +36,13 @@ public class PeerInfo {
     BufferedReader bufferedReader = null;
     BufferedWriter bufferedWriter = null;
 
-    public PeerInfo() {
-        nome = "Peer1";
-        port = 7577;
-        try {
-            server = new ServerSocket(port);
-            peer = new Socket(InetAddress.getLocalHost(), port);
-        } catch (IOException ex) {
-            Logger.getLogger(PeerInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public PeerInfo(String nome, int port) {
+    public PeerInfo(String nome, int port, int portDestinatario) throws IOException {
         this.nome = nome;
         this.port = port;
-        try {
-            server = new ServerSocket(port);
-            peer = new Socket(InetAddress.getLocalHost(), port);
-        } catch (IOException ex) {
-            Logger.getLogger(PeerInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void connessione() throws IOException {
-//            System.out.println("Ip: "+peer.getInetAddress()+ " Port: "+peer.getPort());
-//            System.out.println("Ip: "+peer2.peer.getInetAddress()+ " Port: "+peer2.peer.getPort());
-        System.out.println(nome + ": in attesa di connessione");
-        peer = server.accept();
-        System.out.println(nome + ": connesso");
-    }
-
-    public void comunicazione() {
-        try {
-            inputStreamReader = new InputStreamReader(peer.getInputStream());
-            outputStreamWriter = new OutputStreamWriter(peer.getOutputStream());
-
-            bufferedReader = new BufferedReader(inputStreamReader);
-            bufferedWriter = new BufferedWriter(outputStreamWriter);
-
-            Scanner tastiera = new Scanner(System.in);
-            String msgToSend = "";
-            while (!msgToSend.equalsIgnoreCase("Bye")) {
-                System.out.print("["+nome+"]");
-                msgToSend = tastiera.nextLine();
-                bufferedWriter.write(msgToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(PeerInfo.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+        this.portDestinatario = portDestinatario;
+   
+        server=new ServerPeer(port);
+        client=new ClientPeer(nome,portDestinatario);
     }
 
 }
