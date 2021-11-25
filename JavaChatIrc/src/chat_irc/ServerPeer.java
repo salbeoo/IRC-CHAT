@@ -28,6 +28,8 @@ public class ServerPeer {
     OutputStreamWriter outputStreamWriter = null;
     BufferedReader bufferedReader = null;
     BufferedWriter bufferedWriter = null;
+    
+    String nomeC;
 
     public ServerPeer(int port) throws IOException {
         server = new ServerSocket(port);
@@ -35,10 +37,18 @@ public class ServerPeer {
 
     public void attenti() {
 
+        
         try {
             System.out.println("Server in ascolto");
             peerTo = server.accept();
             server.close();
+            
+            inputStreamReader = new InputStreamReader(peerTo.getInputStream());
+            bufferedReader = new BufferedReader(inputStreamReader);
+            String msgToSend = "";
+            msgToSend = bufferedReader.readLine();
+            nomeC=msgToSend;
+            
             System.out.println("Server connesso");
         } catch (IOException ex) {
             Logger.getLogger(ServerPeer.class.getName()).log(Level.SEVERE, null, ex);
@@ -57,12 +67,12 @@ public class ServerPeer {
             while (!msgToSend.equalsIgnoreCase("Bye")) {
                 msgToSend = bufferedReader.readLine();
 
-                System.out.print(msgToSend);
+                System.out.println("[" + nomeC + "]"+msgToSend);
                 
 
-                bufferedWriter.write(msgToSend);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+//                bufferedWriter.write(msgToSend);
+//                bufferedWriter.newLine();
+//                bufferedWriter.flush();
             }
 
         } catch (IOException ex) {
