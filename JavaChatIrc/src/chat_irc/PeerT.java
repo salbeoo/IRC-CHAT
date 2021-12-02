@@ -38,9 +38,12 @@ public class PeerT extends Thread {
             
             if (scelta.equalsIgnoreCase("C")) {
                 peer.client.connetti();
-            } else{
+            } else if(scelta.equalsIgnoreCase("M")) {
                 peer.client.messaggia();
             }
+//            }else if(scelta.equalsIgnoreCase("D")){
+//                peer.server.disconnetti();
+//            }
         }
     }
 

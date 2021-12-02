@@ -43,10 +43,10 @@ public class ClientPeer {
 
             System.out.println("Provo a connettermi al server del peer2");
             peer = new Socket(InetAddress.getLocalHost(), portConnessione);
-            
+
             outputStreamWriter = new OutputStreamWriter(peer.getOutputStream());
             bufferedWriter = new BufferedWriter(outputStreamWriter);
-            
+
             bufferedWriter.write(nome);
             bufferedWriter.newLine();
             bufferedWriter.flush();
@@ -80,4 +80,5 @@ public class ClientPeer {
         }
 
     }
+
 }

@@ -78,5 +78,13 @@ public class ServerPeer {
         } catch (IOException ex) {
             Logger.getLogger(ServerPeer.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+    }
+    public void disconnetti(){
+        try {
+            peerTo.close();
+        } catch (IOException ex) {
+            Logger.getLogger(ServerPeer.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
